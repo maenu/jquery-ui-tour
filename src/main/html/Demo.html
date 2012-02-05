@@ -8,15 +8,16 @@
 		
 		<link rel="stylesheet" type="text/css" href="../../../lib/jquery-ui-1.8.13/jquery-ui-1.8.13.custom.css">
 		<link rel="stylesheet" type="text/css" href="../css/jquery.maenulabs.tour.css" />
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.maenulabs.tour.css" />
+		<link rel="stylesheet" type="text/css" href="../css/jquery-ui-extensions/jquery-ui.maenulabs.extensions-0.5.1.min.css" />
 		<style type="text/css">
 			body {
-				padding: 1em;
 				width: 3000px;
 				height: 3000px;
 			}
 			.section {
-				margin: 0.5em;
-				margin-bottom: 3em;
+				padding: 1em;
+				margin-bottom: 0.5em 0.5em 2em 0.5em;
 			}
 			.sub-section {
 				margin: 0.5em;
@@ -26,10 +27,27 @@
 		<script type="text/javascript" src="../../../lib/jquery-1.7.1.min.js"></script>
 		<script type="text/javascript" src="../../../lib/jquery.cookies.2.2.0.min.js"></script>
 		<script type="text/javascript" src="../../../lib/jquery-ui-1.8.13/jquery-ui-1.8.13.custom.min.js"></script>
+		<script type="text/javascript" src="../../../lib/globalize-0.1.0a2/globalize.js"></script>
+		<script type="text/javascript" src="../../../lib/globalize-0.1.0a2/cultures/globalize.cultures.js"></script>
+		<script type="text/javascript" src="../../../lib/globalize.maenulabs.formatter.min.js"></script>
+		<script type="text/javascript" src="../../../lib/jquery.maenulabs.globalization-0.1.min.js"></script>
+		<script type="text/javascript" src="../../../lib/jquery.maenulabs.extensions-0.1.min.js"></script>
+		<script type="text/javascript" src="../../../lib/jquery-ui-extensions/jquery-ui.maenulabs.extensions-0.5.1.min.js"></script>
 		
 		<script type="text/javascript" src="../js/jquery.maenulabs.tour.js"></script>
+		<script type="text/javascript" src="../js/jquery-ui.maenulabs.tour.js"></script>
 		
 		<script type="text/javascript">
+			Globalize.addCultureInfo("en", {
+				messages: {
+					"ui.tour.backward": "Backward",
+					"ui.tour.forward": "Forward",
+					"ui.automatictour.play": "Play",
+					"ui.automatictour.pause": "Pause",
+					"ui.automatictour.stop": "Stop"
+				}
+			});
+			
 			$(document).ready(function() {
 				$("html").scrollLeft($("html").width());
 				$("html").scrollTop($("html").height());
@@ -38,8 +56,11 @@
 				var step3 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).highlight($("#highlight")).manipulations);
 				var step4 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("#mark"), "1").manipulations);
 				var step5 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).hint($("#hint"), "This should help you").manipulations);
-				var tour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5], 3000);
-				tour.play();
+				var automatictour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5], 3000);
+				var $automatictour = $('<div>').appendTo($("body"));
+				$automatictour.automatictour({
+					automatictour: automatictour
+				});
 			});
 		</script>
 		

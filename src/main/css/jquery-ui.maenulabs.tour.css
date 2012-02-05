@@ -1,0 +1,21 @@
+/**
+ * Style for jQuery UI tour.
+ *
+ * @author
+ *     Manuel Leuenberger
+ */
+
+.ui-tour, .ui-automatictour {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	padding: 0.5em;
+	background-color: #F6F6F6;
+	opacity: 0.7;
+	text-align: center;
+	z-index: 100002;
+}
+
+.ui-tour > *, .ui-automatictour > * {
+	display: inline-block;
+}
