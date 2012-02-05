@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		
+		<title>maenuLabs jQuery Tour Demo</title>
+		
+		<link rel="stylesheet" type="text/css" href="../../../lib/jquery-ui-1.8.13/jquery-ui-1.8.13.custom.css">
+		<link rel="stylesheet" type="text/css" href="../css/jquery.maenulabs.tour.css" />
+		<style type="text/css">
+			body {
+				padding: 1em;
+				width: 3000px;
+				height: 3000px;
+			}
+			.section {
+				margin: 0.5em;
+				margin-bottom: 3em;
+			}
+			.sub-section {
+				margin: 0.5em;
+			}
+		</style>
+		
+		<script type="text/javascript" src="../../../lib/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="../../../lib/jquery.cookies.2.2.0.min.js"></script>
+		<script type="text/javascript" src="../../../lib/jquery-ui-1.8.13/jquery-ui-1.8.13.custom.min.js"></script>
+		
+		<script type="text/javascript" src="../js/jquery.maenulabs.tour.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("html").scrollLeft($("html").width());
+				$("html").scrollTop($("html").height());
+				var step1 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#scrollTo")).manipulations);
+				var step2 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).expose($("#expose")).manipulations);
+				var step3 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).highlight($("#highlight")).manipulations);
+				var step4 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("#mark"), "1").manipulations);
+				var step5 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).hint($("#hint"), "This should help you").manipulations);
+				var tour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5], 3000);
+				tour.play();
+			});
+		</script>
+		
+	</head>
+	
+	<body>
+		
+		<!--manipulations-->
+		<div class="section">
+			<h2>Manipulations</h2>
+			You can combine multiple manipulations to a step in the tutorial.
+			<div class="sub-section">
+				<input type="text" id="scrollTo" value="This is a ScrollToManipulation" />
+				<br />
+				<input type="text" id="expose" value="This is an ExposeManipulation" />
+				<br />
+				<input type="text" id="highlight" value="This is a HighlightManipulation" />
+				<br />
+				<input type="text" id="mark" value="This is a MarkManipulation" />
+				<br />
+				<input type="text" id="hint" value="This is a HintManipulation" />
+			</div>
+		</div>
+		
+	</body>
+	
+</html>
