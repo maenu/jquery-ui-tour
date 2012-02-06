@@ -5,7 +5,7 @@
  *     Manuel Leuenberger
  */
 
-.ui-tour, .ui-automatictour {
+.ui-tour {
 	position: fixed;
 	bottom: 0;
 	width: 100%;
@@ -16,6 +16,6 @@
 	z-index: 100002;
 }
 
-.ui-tour > *, .ui-automatictour > * {
+.ui-tour > * {
 	display: inline-block;
 }

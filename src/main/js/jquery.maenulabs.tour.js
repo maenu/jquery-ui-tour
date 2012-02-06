@@ -9,12 +9,84 @@
 (function($, undefined) {
 	
 	/**
+	 * Creates an Observer.
+	 */
+	function Observer() {}
+	
+	/**
+	 * Called whenever an Observable updates its Observers.
+	 *
+	 * @param observable
+	 *     The Observable
+	 * @param args
+	 *     The arguments passed by the observable
+	 */
+	Observer.prototype.updateObservable = function(observable, args) {};
+	
+	/**
+	 * Creates an Observable.
+	 */
+	function Observable() {
+		/**
+		 * The Observers.
+		 */
+		this.observers = [];
+	}
+	
+	/**
+	 * Updates all Observers this the specified arguments.
+	 *
+	 * @param args
+	 *     The arguments to pass to the Observers
+	 */
+	Observable.prototype.updateObservers = function(args) {
+		for (var i = 0; i < this.observers.length; i++) {
+			this.observers[i].updateObservable(this, args);
+		}
+	};
+	
+	/**
+	 * Adds an Observer. If it is already registered, it will not be added
+	 * again.
+	 *
+	 * @param observer
+	 *     The observer to add
+	 */
+	Observable.prototype.addObserver = function(observer) {
+		for (var i = 0; i < this.observers.length; i++) {
+			var registered = this.observers[i];
+			if (registered == observer) {
+				return;
+			}
+		}
+		this.observers.push(observer);
+	};
+	
+	/**
+	 * Removes an Observer. If it is not already registered, it will not have no
+	 * effect.
+	 *
+	 * @param observer
+	 *     The observer to remove
+	 */
+	Observable.prototype.removeObserver = function(observer) {
+		for (var i = 0; i < this.observers.length; i++) {
+			var registered = this.observers[i];
+			if (registered == observer) {
+				this.observers.splice(i, 1);
+				return;
+			}
+		}
+	};
+	
+	/**
 	 * Creates a Tour with the specified steps.
 	 *
 	 * @param steps
 	 *     An array of steps
 	 */
 	function Tour(steps) {
+		Observable.apply(this);
 		/**
 		 * The Steps.
 		 */
@@ -24,6 +96,18 @@
 		 */
 		this.currentStepIndex = -1;
 	}
+	Tour.prototype = new Observable();
+	Tour.prototype.constructor = Tour;
+	
+	/**
+	 * Reverts the current step.
+	 */
+	Tour.prototype.revertCurrentStep = function() {
+		if (this.currentStepIndex >= 0
+				&& this.currentStepIndex < this.steps.length) {
+			this.steps[this.currentStepIndex].revert();
+		}
+	};
 	
 	/**
 	 * Goes one step forward.
@@ -33,6 +117,7 @@
 			this.steps[this.currentStepIndex].revert();
 		}
 		this.steps[++this.currentStepIndex].deploy();
+		this.updateObservers("forward");
 	};
 	
 	/**
@@ -43,6 +128,7 @@
 			this.steps[this.currentStepIndex].revert();
 		}
 		this.steps[--this.currentStepIndex].deploy();
+		this.updateObservers("backward");
 	};
 	
 	/**
@@ -93,12 +179,22 @@
 	AutomaticTour.prototype.play = function() {
 		this.forward();
 		this.intervalId = setInterval($.proxy(function() {
-			if (this.canForward()) {
-				this.forward();
-			} else {
-				this.stop();
-			}
-		}, this), this.interval);
+				if (this.canForward()) {
+					this.forward();
+				} else {
+					this.stop();
+				}
+			}, this), this.interval);
+		this.updateObservers("play");
+	};
+	
+	/**
+	 * Pauses it.
+	 */
+	AutomaticTour.prototype.pause = function() {
+		clearInterval(this.intervalId);
+		this.intervalId = null;
+		this.updateObservers("pause");
 	};
 	
 	/**
@@ -107,16 +203,11 @@
 	AutomaticTour.prototype.stop = function() {
 		if (this.isPlaying()) {
 			clearInterval(this.intervalId);
+			this.intervalId = null;
 			this.steps[this.currentStepIndex].revert();
 		}
 		this.currentStepIndex = -1;
-	};
-	
-	/**
-	 * Pauses it.
-	 */
-	AutomaticTour.prototype.pause = function() {
-		clearInterval(this.intervalId);
+		this.updateObservers("stop");
 	};
 	
 	/**
@@ -208,8 +299,8 @@
 	
 	ScrollToManipulation.prototype.deploy = function() {
 		var viewportSize = {
-			width: $(document).width(),
-			height: $(document).height()
+			width: $(window).width(),
+			height: $(window).height()
 		};
 		var elementSize = {
 			width: this.$element.width(),
@@ -227,7 +318,7 @@
 	};
 	
 	/**
-	 * Creates an JQueryManipulation.
+	 * Creates an ExposeManipulation.
 	 *
 	 * @param $element
 	 *     A jQuery object
@@ -235,32 +326,23 @@
 	function ExposeManipulation($element) {
 		JQueryManipulation.apply(this, [$element]);
 		/**
-		 * The old overwritten CSS properties of the element.
-		 */
-		this.oldProperties = {};
-		/**
 		 * The cover for the body.
 		 */
-		this.$cover = null;
+		this.$cover = $('<div>');
+		this.$cover.addClass(ExposeManipulation.COVER_CLASSES);
 	}
 	ExposeManipulation.prototype = new JQueryManipulation();
 	ExposeManipulation.prototype.constructor = ScrollToManipulation;
+	ExposeManipulation.COVER_CLASSES = "ui-tour-manipulation-expose-cover";
+	ExposeManipulation.CLASSES = "ui-tour-manipulation-expose";
 	
 	ExposeManipulation.prototype.deploy = function() {
-		this.oldProperties = {
-			"z-index": this.$element.css("z-index"),
-			"position": this.$element.css("position")
-		};
-		this.$element.css({
-			"z-index": 100001,
-			"position": "relative"
-		});
-		this.$cover = $('<div>').appendTo($("body"));
-		this.$cover.addClass("ui-tour-manipulation-expose-cover");
+		this.$element.addClass(ExposeManipulation.CLASSES);
+		this.$cover.appendTo($("body"));
 	};
 	
 	ExposeManipulation.prototype.revert = function() {
-		this.$element.css(this.oldProperties);
+		this.$element.removeClass(ExposeManipulation.CLASSES);
 		this.$cover.remove();
 	};
 	
@@ -275,13 +357,14 @@
 	}
 	HighlightManipulation.prototype = new JQueryManipulation();
 	HighlightManipulation.prototype.constructor = HighlightManipulation;
+	HighlightManipulation.CLASSES = "ui-tour-manipulation-highlight";
 	
 	HighlightManipulation.prototype.deploy = function() {
-		this.$element.addClass("ui-tour-manipulation-highlight");
+		this.$element.addClass(HighlightManipulation.CLASSES);
 	};
 	
 	HighlightManipulation.prototype.revert = function() {
-		this.$element.removeClass("ui-tour-manipulation-highlight");
+		this.$element.removeClass(HighlightManipulation.CLASSES);
 	};
 	
 	/**
@@ -302,10 +385,11 @@
 		if (text != null) {
 			this.$mark.text(text);
 		}
-		this.$mark.addClass("ui-tour-manipulation-mark");
+		this.$mark.addClass(MarkManipulation.CLASSES);
 	}
 	MarkManipulation.prototype = new JQueryManipulation();
 	MarkManipulation.prototype.constructor = MarkManipulation;
+	MarkManipulation.CLASSES = "ui-widget ui-tour-manipulation-mark";
 	
 	MarkManipulation.prototype.deploy = function() {
 		this.$mark.appendTo($("body"));
@@ -337,10 +421,11 @@
 		this.$hint = $('<div>');
 		
 		this.$hint.append(content);
-		this.$hint.addClass("ui-tour-manipulation-hint");
+		this.$hint.addClass(HintManipulation.CLASSES);
 	}
 	HintManipulation.prototype = new JQueryManipulation();
 	HintManipulation.prototype.constructor = HintManipulation;
+	HintManipulation.CLASSES = "ui-widget ui-tour-manipulation-hint";
 	
 	HintManipulation.prototype.deploy = function() {
 		this.$hint.appendTo($("body"));
@@ -451,6 +536,7 @@
 	$.tour.manipulation.ExposeManipulation = ExposeManipulation;
 	$.tour.manipulation.HighlightManipulation = HighlightManipulation;
 	$.tour.manipulation.MarkManipulation = MarkManipulation;
+	$.tour.manipulation.HintManipulation = HintManipulation;
 	$.tour.manipulation.ManipulationBuilder = ManipulationBuilder;
 	
 	$(document).ready(function() {

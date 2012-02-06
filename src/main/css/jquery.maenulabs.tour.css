@@ -5,6 +5,11 @@
  *     Manuel Leuenberger
  */
 
+.ui-tour-manipulation-expose {
+	position: relative !important;
+	z-index: 100001 !important;
+}
+
 .ui-tour-manipulation-expose-cover {
 	position: absolute;
 	top: 0;
@@ -19,7 +24,7 @@
 }
 
 .ui-tour-manipulation-highlight {
-	background-color: #F9EFAE;
+	background-color: #F9EFAE !important;
 }
 
 .ui-tour-manipulation-mark {
