@@ -178,6 +178,7 @@
 		},
 		
 		destroy: function() {
+			this.options.tour.stop();
 			this.$play.remove();
 			this.$pause.remove();
 			this.$stop.remove();
