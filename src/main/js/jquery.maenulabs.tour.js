@@ -539,11 +539,4 @@
 	$.tour.manipulation.HintManipulation = HintManipulation;
 	$.tour.manipulation.ManipulationBuilder = ManipulationBuilder;
 	
-	$(document).ready(function() {
-		/*if (tour != null && (location.hash == "#tour"
-				|| $.cookies.get(tour) == "true")) {
-			tour.start();
-		}*/
-	});
-	
 }(jQuery));
