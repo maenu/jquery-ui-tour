@@ -35,9 +35,6 @@
 			this.$forward = $('<button type="button">'
 					+ $.globalization.localize("ui.tour.forward")
 					+ '</button>').appendTo(this.element);
-			this.$close = $('<button type="button">'
-					+ $.globalization.localize("ui.tour.close")
-					+ '</button>').appendTo(this.element);
 			
 			this.$backward.button({
 				icons: {
@@ -63,17 +60,6 @@
 					}, this));
 			this.$forward.button("option", "disabled",
 					!this.options.tour.canForward());
-			this.$close.button({
-				icons: {
-					primary: "ui-icon-close"
-				},
-				text: false
-			});
-			this.$close.bind("click." + this.widgetName + this.uniqueId,
-					$.proxy(function() {
-						this.options.tour.revertCurrentStep();
-						this.element.remove();
-					}, this));
 			this.element.addClass(tourClasses);
 		},
 		
@@ -81,7 +67,6 @@
 			this.options.tour.removeObserver(this);
 			this.$backward.remove();
 			this.$forward.remove();
-			this.$close.remove();
 			this.element.removeClass(tourClasses);
 			
 			$.ui.basewidget.prototype.destroy.apply(this, arguments);
@@ -214,4 +199,4 @@
 		
 	});
 	
-})(jQuery)
+})(jQuery);

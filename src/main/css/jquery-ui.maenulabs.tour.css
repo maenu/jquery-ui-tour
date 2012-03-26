@@ -6,16 +6,5 @@
  */
 
 .ui-tour {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	padding: 0.5em;
-	background-color: #F6F6F6;
-	opacity: 0.7;
-	text-align: center;
 	z-index: 100002;
-}
-
-.ui-tour > * {
-	display: inline-block;
 }

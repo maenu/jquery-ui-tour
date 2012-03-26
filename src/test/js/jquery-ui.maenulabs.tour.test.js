@@ -53,7 +53,6 @@ describe("jquery-ui.maenulabs.tour", function() {
 		describe("buttons", function() {
 			
 			it("should enable and disable", function() {
-				expect($tour.find("button").eq(2).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(0).is(":disabled")).toBeTruthy();
 				expect($tour.find("button").eq(1).is(":enabled")).toBeTruthy();
 				tour.forward();
@@ -76,7 +75,7 @@ describe("jquery-ui.maenulabs.tour", function() {
 				});
 				waitsFor(function() {
 					return !simulation.isRunning();
-				}, "simulation to finish", 500);
+				}, "going forward", 500);
 				runs(function() {
 					expect($element.hasClass($.tour.manipulation.ExposeManipulation.CLASSES)).toBeTruthy();
 					expect($element.hasClass($.tour.manipulation.HighlightManipulation.CLASSES)).toBeFalsy();
@@ -85,7 +84,7 @@ describe("jquery-ui.maenulabs.tour", function() {
 				});
 				waitsFor(function() {
 					return !simulation.isRunning();
-				}, "simulation to finish", 500);
+				}, "going forward", 500);
 				runs(function() {
 					expect($element.hasClass($.tour.manipulation.ExposeManipulation.CLASSES)).toBeFalsy();
 					expect($element.hasClass($.tour.manipulation.HighlightManipulation.CLASSES)).toBeTruthy();
@@ -94,20 +93,10 @@ describe("jquery-ui.maenulabs.tour", function() {
 				});
 				waitsFor(function() {
 					return !simulation.isRunning();
-				}, "simulation to finish", 500);
+				}, "going backward", 500);
 				runs(function() {
 					expect($element.hasClass($.tour.manipulation.ExposeManipulation.CLASSES)).toBeTruthy();
 					expect($element.hasClass($.tour.manipulation.HighlightManipulation.CLASSES)).toBeFalsy();
-					simulation = new $.simula.Simulation($tour.find("button").eq(2), [0, 0]);
-					simulation.click().execute();
-				});
-				waitsFor(function() {
-					return !simulation.isRunning();
-				}, "simulation to finish", 500);
-				runs(function() {
-					expect($element.hasClass($.tour.manipulation.ExposeManipulation.CLASSES)).toBeFalsy();
-					expect($element.hasClass($.tour.manipulation.HighlightManipulation.CLASSES)).toBeFalsy();
-					expect($(".ui-tour").size()).toEqual(0);
 				});
 			});
 			
@@ -116,7 +105,6 @@ describe("jquery-ui.maenulabs.tour", function() {
 		it("should set button texts", function() {
 			expect($tour.find("button").eq(0).text()).toEqual("Backward");
 			expect($tour.find("button").eq(1).text()).toEqual("Forward");
-			expect($tour.find("button").eq(2).text()).toEqual("Close");
 		});
 		
 		describe("options", function() {
@@ -163,7 +151,7 @@ describe("jquery-ui.maenulabs.tour", function() {
 			manipulationBuilder = new $.tour.manipulation.ManipulationBuilder();
 			manipulationBuilder.highlight($element);
 			var step2 = new $.tour.Step(manipulationBuilder.manipulations);
-			tour = new $.tour.AutomaticTour([step1, step2], 500);
+			tour = new $.tour.AutomaticTour([step1, step2], 50);
 			$tour = $(tourMarkup).appendTo($("body")).automatictour({
 				tour: tour
 			});
@@ -181,12 +169,15 @@ describe("jquery-ui.maenulabs.tour", function() {
 				expect($tour.find("button").eq(0).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(1).is(":disabled")).toBeTruthy();
 				tour.play();
+				expect($tour.find("button").eq(2).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(0).is(":disabled")).toBeTruthy();
 				expect($tour.find("button").eq(1).is(":enabled")).toBeTruthy();
 				tour.pause();
+				expect($tour.find("button").eq(2).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(0).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(1).is(":disabled")).toBeTruthy();
 				tour.stop();
+				expect($tour.find("button").eq(2).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(0).is(":enabled")).toBeTruthy();
 				expect($tour.find("button").eq(1).is(":disabled")).toBeTruthy();
 			});

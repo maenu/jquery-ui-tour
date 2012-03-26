@@ -6,16 +6,14 @@
  */
 
 .ui-tour-manipulation-expose {
-	position: relative !important;
+	position: relative;
 	z-index: 100001 !important;
 }
 
 .ui-tour-manipulation-expose-cover {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	left: 0;
-	bottom: 0;
-	right: 0;
 	width: 100%;
 	height: 100%;
 	background-color: #FFFFFF;

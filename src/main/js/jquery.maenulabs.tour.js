@@ -204,8 +204,8 @@
 		if (this.isPlaying()) {
 			clearInterval(this.intervalId);
 			this.intervalId = null;
-			this.steps[this.currentStepIndex].revert();
 		}
+		this.revertCurrentStep();
 		this.currentStepIndex = -1;
 		this.updateObservers("stop");
 	};
@@ -328,8 +328,7 @@
 		/**
 		 * The cover for the body.
 		 */
-		this.$cover = $('<div>');
-		this.$cover.addClass(ExposeManipulation.COVER_CLASSES);
+		this.$cover = null;
 	}
 	ExposeManipulation.prototype = new JQueryManipulation();
 	ExposeManipulation.prototype.constructor = ScrollToManipulation;
@@ -338,7 +337,8 @@
 	
 	ExposeManipulation.prototype.deploy = function() {
 		this.$element.addClass(ExposeManipulation.CLASSES);
-		this.$cover.appendTo($("body"));
+		this.$cover = $('<div>').appendTo($("body")).addClass(
+				ExposeManipulation.COVER_CLASSES);
 	};
 	
 	ExposeManipulation.prototype.revert = function() {
