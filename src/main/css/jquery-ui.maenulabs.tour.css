@@ -6,5 +6,6 @@
  */
 
 .ui-tour {
-	z-index: 100002;
+	position: relative;
+	z-index: 5002 !important;
 }
