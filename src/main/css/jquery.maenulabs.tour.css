@@ -8,7 +8,6 @@
 .ui-tour-manipulation-expose {
 	position: relative;
 	z-index: 5001 !important;
-	display: inline-block;
 }
 
 .ui-tour-manipulation-expose-cover {
@@ -53,6 +52,7 @@
 
 .ui-tour-manipulation-hint:before {
 	content: "";
+	clip: rect(0.6em, 1.2em, 1.2em, 0);
 	display: block;
 	position: absolute;
 	border-color: transparent transparent #F69F8D transparent;
