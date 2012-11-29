@@ -307,7 +307,7 @@
 			height: this.$element.height()
 		};
 		var elementOffset = this.$element.offset();
-		$("html").animate({
+		$("html,body").animate({
 			scrollLeft: elementOffset.left
 				+ (elementSize.width - viewportSize.width) / 2,
 			scrollTop: elementOffset.top
