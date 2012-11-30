@@ -12,7 +12,7 @@
 	/**
 	 * Controls a Tour.
 	 */
-	$.widget("ui.tour", $.ui.basewidget, {
+	$.widget("ui.tour", $.Widget, {
 		
 		// default options
 		options: {
@@ -25,16 +25,12 @@
 		// overrides
 		
 		_create: function() {
-			$.ui.basewidget.prototype._create.apply(this);
+			$.Widget.prototype._create.apply(this);
 			
 			this.options.tour.addObserver(this);
 			
-			this.$backward = $('<button type="button">'
-					+ $.globalization.localize("ui.tour.backward")
-					+ '</button>').appendTo(this.element);
-			this.$forward = $('<button type="button">'
-					+ $.globalization.localize("ui.tour.forward")
-					+ '</button>').appendTo(this.element);
+			this.$backward = $('<button type="button">').appendTo(this.element);
+			this.$forward = $('<button type="button">').appendTo(this.element);
 			
 			this.$backward.button({
 				icons: {
@@ -42,7 +38,7 @@
 				},
 				text: false
 			});
-			this.$backward.bind("click." + this.widgetName + this.uniqueId,
+			this.$backward.bind("click." + this.widgetName,
 					$.proxy(function() {
 						this.options.tour.backward();
 					}, this));
@@ -54,7 +50,7 @@
 				},
 				text: false
 			});
-			this.$forward.bind("click." + this.widgetName + this.uniqueId,
+			this.$forward.bind("click." + this.widgetName,
 					$.proxy(function() {
 						this.options.tour.forward();
 					}, this));
@@ -69,7 +65,7 @@
 			this.$forward.remove();
 			this.element.removeClass(tourClasses);
 			
-			$.ui.basewidget.prototype.destroy.apply(this, arguments);
+			$.Widget.prototype.destroy.apply(this, arguments);
 		},
 	
 		_setOption: function(key, value) {
@@ -77,7 +73,7 @@
 				this.options.tour.removeObserver(this);
 			}
 			
-			$.ui.basewidget.prototype._setOption.apply(this, arguments);
+			$.Widget.prototype._setOption.apply(this, arguments);
 			
 			if (key == "tour") {
 				this.options.tour.addObserver(this);
@@ -115,15 +111,9 @@
 		_create: function() {
 			$.ui.tour.prototype._create.apply(this);
 			
-			this.$play = $('<button type="button">'
-					+ $.globalization.localize("ui.automatictour.play")
-					+ '</button>').insertBefore(this.$backward);
-			this.$pause = $('<button type="button">'
-					+ $.globalization.localize("ui.automatictour.pause")
-					+ '</button>').insertBefore(this.$backward);
-			this.$stop = $('<button type="button">'
-					+ $.globalization.localize("ui.automatictour.stop")
-					+ '</button>').insertBefore(this.$backward);
+			this.$play = $('<button type="button">').insertBefore(this.$backward);
+			this.$pause = $('<button type="button">').insertBefore(this.$backward);
+			this.$stop = $('<button type="button">').insertBefore(this.$backward);
 			
 			this.$play.button({
 				icons: {
@@ -131,7 +121,7 @@
 				},
 				text: false
 			});
-			this.$play.bind("click." + this.widgetName + this.uniqueId,
+			this.$play.bind("click." + this.widgetName,
 					$.proxy(function() {
 						this.options.tour.play();
 					}, this));
@@ -143,7 +133,7 @@
 				},
 				text: false
 			});
-			this.$pause.bind("click." + this.widgetName + this.uniqueId,
+			this.$pause.bind("click." + this.widgetName,
 					$.proxy(function() {
 						this.options.tour.pause();
 					}, this));
@@ -155,7 +145,7 @@
 				},
 				text: false
 			});
-			this.$stop.bind("click." + this.widgetName + this.uniqueId,
+			this.$stop.bind("click." + this.widgetName,
 					$.proxy(function() {
 						this.options.tour.stop();
 					}, this));

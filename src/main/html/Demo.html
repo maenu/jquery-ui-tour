@@ -7,7 +7,6 @@
 		<title>maenuLabs jQuery Tour Demo</title>
 		
 		<link rel="stylesheet" type="text/css" href="../../../lib/jquery-ui-1.9.2/jquery-ui-1.9.2.min.css" />
-		<link rel="stylesheet" type="text/css" href="../../../lib/jquery-ui-extensions-0.9/jquery-ui.maenulabs.extensions-0.9.min.css" />
 		<link rel="stylesheet" type="text/css" href="../css/jquery.maenulabs.tour.css" />
 		<link rel="stylesheet" type="text/css" href="../css/jquery-ui.maenulabs.tour.css" />
 		<style type="text/css">
@@ -26,27 +25,11 @@
 		
 		<script type="text/javascript" src="../../../lib/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript" src="../../../lib/jquery-ui-1.9.2/jquery-ui-1.9.2.min.js"></script>
-		<script type="text/javascript" src="../../../lib/globalize-0.1.0a2/globalize.js"></script>
-		<script type="text/javascript" src="../../../lib/globalize-0.1.0a2/cultures/globalize.cultures.js"></script>
-		<script type="text/javascript" src="../../../lib/globalize.maenulabs.formatter-0.1.min.js"></script>
-		<script type="text/javascript" src="../../../lib/jquery-globalization-0.1/jquery.maenulabs.globalization-0.1.min.js"></script>
-		<script type="text/javascript" src="../../../lib/jquery-ui-extensions-0.9/jquery-ui.maenulabs.extensions-0.9.min.js"></script>
 		
 		<script type="text/javascript" src="../js/jquery.maenulabs.tour.js"></script>
 		<script type="text/javascript" src="../js/jquery-ui.maenulabs.tour.js"></script>
 		
 		<script type="text/javascript">
-			Globalize.addCultureInfo("en", {
-				messages: {
-					"ui.tour.backward": "Backward",
-					"ui.tour.forward": "Forward",
-					"ui.tour.close": "Close",
-					"ui.automatictour.play": "Play",
-					"ui.automatictour.pause": "Pause",
-					"ui.automatictour.stop": "Stop"
-				}
-			});
-			
 			$(document).ready(function() {
 				$("html,body").animate({
 					scrollLeft: $("html").width(),
@@ -59,6 +42,7 @@
 				var step5 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).hint($("#hint"), "This should help you").manipulations);
 				var automatictour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5], 3000);
 				var $automatictour = $('<div>').appendTo($("body"));
+				$automatictour.css("margin-top", "5em");
 				$automatictour.automatictour({
 					tour: automatictour
 				});

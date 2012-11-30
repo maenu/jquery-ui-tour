@@ -6,19 +6,6 @@
  */
 
 describe("jquery-ui.maenulabs.tour", function() {
-			
-	beforeEach(function() {
-		Globalize.addCultureInfo("en", {
-			messages: {
-				"ui.tour.backward": "Backward",
-				"ui.tour.forward": "Forward",
-				"ui.tour.close": "Close",
-				"ui.automatictour.play": "Play",
-				"ui.automatictour.pause": "Pause",
-				"ui.automatictour.stop": "Stop"
-			}
-		});
-	});
 	
 	describe("ui.tour", function() {
 		
@@ -100,11 +87,6 @@ describe("jquery-ui.maenulabs.tour", function() {
 				});
 			});
 			
-		});
-		
-		it("should set button texts", function() {
-			expect($tour.find("button").eq(0).text()).toEqual("Backward");
-			expect($tour.find("button").eq(1).text()).toEqual("Forward");
 		});
 		
 		describe("options", function() {
@@ -233,12 +215,6 @@ describe("jquery-ui.maenulabs.tour", function() {
 				});
 			});
 			
-		});
-		
-		it("should set button texts", function() {
-			expect($tour.find("button").eq(0).text()).toEqual("Play");
-			expect($tour.find("button").eq(1).text()).toEqual("Pause");
-			expect($tour.find("button").eq(2).text()).toEqual("Stop");
 		});
 		
 		describe("options", function() {
