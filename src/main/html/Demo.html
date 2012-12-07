@@ -32,20 +32,48 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("html,body").animate({
-					scrollLeft: $("html").width(),
-					scrollTop: $("html").height()
+					scrollLeft: 100,
+					scrollTop: 200
 				});
 				var step1 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#scrollTo")).manipulations);
 				var step2 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).expose($("#expose")).manipulations);
 				var step3 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).highlight($("#highlight")).manipulations);
 				var step4 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("#mark"), "1").manipulations);
 				var step5 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).hint($("#hint"), "This should help you").manipulations);
-				var automatictour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5], 3000);
-				var $automatictour = $('<div>').appendTo($("body"));
-				$automatictour.css("margin-top", "5em");
-				$automatictour.automatictour({
+				var automatictour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5], 1000);
+				var observer = {
+					updateObservable: function(tour, event) {
+						if (event == "play") {
+							$("#status").text("playing");
+						} else if (event == "stop") {
+							$("#status").text("stopped");
+						} else
+						if (event == "pause") {
+							$("#status").text("paused");
+						} else
+						if (event == "forward" || event == "backward") {
+							$("#step").text(automatictour.currentStepIndex + 1);
+						}
+					}
+				};
+				automatictour.addObserver(observer);
+				$("#automatictour").automatictour({
 					tour: automatictour
 				});
+				$("#automatictour").children().each(function(index) {
+					if (index == 0) {
+						$(this).attr("title", "Play the tour");
+					} else if (index == 1) {
+						$(this).attr("title", "Pause the tour");
+					} else if (index == 2) {
+						$(this).attr("title", "Stop the tour");
+					} else if (index == 3) {
+						$(this).attr("title", "Go to the next step");
+					} else if (index == 4) {
+						$(this).attr("title", "Go to the previous step");
+					}
+				});
+				$("#controls").draggable();
 			});
 		</script>
 		
@@ -53,20 +81,28 @@
 	
 	<body>
 		
+		<div id="controls" style="position: fixed; top: 30%; left: 30%; background: #4ad9d9; padding: 1em; z-index: 5002 !important;">
+			Click the controls to play all steps or step through the tour step-by-step.
+			<br />
+			You can drag this remote control.
+			<div id="automatictour"></div>
+			<span id="status"></span> on step <span id="step"></span>
+		</div>
+		
 		<!--manipulations-->
 		<div class="section">
 			<h2>Manipulations</h2>
 			You can combine multiple manipulations to a step in the tutorial.
 			<div class="sub-section">
-				<input type="text" id="scrollTo" value="This is a ScrollToManipulation" />
+				<input type="text" id="scrollTo" style="width:300px" value="This is a ScrollToManipulation" />
 				<br />
-				<input type="text" id="expose" value="This is an ExposeManipulation" />
+				<input type="text" id="expose" style="width:300px" value="This is an ExposeManipulation" />
 				<br />
-				<input type="text" id="highlight" value="This is a HighlightManipulation" />
+				<input type="text" id="highlight" style="width:300px" value="This is a HighlightManipulation" />
 				<br />
-				<input type="text" id="mark" value="This is a MarkManipulation" />
+				<input type="text" id="mark" style="width:300px" value="This is a MarkManipulation" />
 				<br />
-				<input type="text" id="hint" value="This is a HintManipulation" />
+				<input type="text" id="hint" style="width:300px" value="This is a HintManipulation" />
 			</div>
 		</div>
 		
