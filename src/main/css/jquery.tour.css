@@ -7,7 +7,7 @@
 
 .ui-tour-manipulation-expose {
 	position: relative;
-	z-index: 5001 !important;
+	z-index: 1001 !important;
 }
 
 .ui-tour-manipulation-expose-cover {
@@ -18,7 +18,7 @@
 	height: 100%;
 	background-color: #FFFFFF;
 	opacity: 0.8;
-	z-index: 5000 !important;
+	z-index: 1000 !important;
 }
 
 .ui-tour-manipulation-highlight {
@@ -36,18 +36,19 @@
 	text-align: center;
 	background-color: #F69F8D;
 	color: #FFFFFF;
-	z-index: 5001 !important;
+	z-index: 1001 !important;
 }
 
 .ui-tour-manipulation-hint {
 	position: absolute;
 	width: auto;
 	height: auto;
+	white-space: nowrap;
 	margin-top: 0.5em;
 	padding: 0.5em;
 	background-color: #F69F8D;
 	color: #FFFFFF;
-	z-index: 5003 !important;
+	z-index: 1003 !important;
 }
 
 .ui-tour-manipulation-hint:before {
