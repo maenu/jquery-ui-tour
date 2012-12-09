@@ -1,0 +1,11 @@
+/**
+ * Style for jQuery UI tour.
+ *
+ * @author
+ *     Manuel Leuenberger
+ */
+
+.ui-tour {
+	position: relative;
+	z-index: 1002 !important;
+}

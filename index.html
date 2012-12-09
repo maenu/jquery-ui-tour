@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+		
+		<title>maenuLabs jQuery Tour Demo</title>
+		
+		<link rel="stylesheet" type="text/css" href="lib/reset.css" />
+		<link rel="stylesheet" type="text/css" href="lib/jquery-ui-1.9.2/jquery-ui-1.9.2.min.css" />
+		<link rel="stylesheet" type="text/css" href="lib/jquery-ui-tour/jquery.tour.css" />
+		<link rel="stylesheet" type="text/css" href="lib/jquery-ui-tour/jquery-ui.tour.css" />
+		<style type="text/css">
+			body {
+				width: 4000px;
+				height: 4000px;
+				font-family: Helvetica Neue, Helvetica, Verdana, Arial, sans-serif;
+				padding: 1em;
+			}
+			h1, h2, h3 {
+				margin: .5em 0;
+				font-weight: bold;
+			}
+			h1 {
+				font-size: 3em;
+			}
+			h2 {
+				font-size: 2.3em;
+			}
+			h3 {
+				font-size: 1.6em;
+			}
+			p {
+				margin: .5em 0;
+				line-height: 1.5;
+			}
+			strong {
+				font-weight: bold;
+			}
+			code {
+				font-family: Source Code Pro, Courier New, Courier, monospace;
+			}
+			input[type=text] {
+				line-height: 1.5;
+			}
+			
+			#control {
+				position: fixed;
+				margin: 2em;
+				padding: .5em;
+				z-index: 1002 !important;
+			}
+			#handle {
+				width: 1.8em;
+				height: 1.8em;
+				cursor: move;
+				display: inline-block;
+			}
+			#handle .ui-icon {
+				position: relative;
+				margin-top: 50%;
+				margin-left: 50%;
+				top: -8px;
+				left: -8px;
+			}
+			#automatictour .ui-button-icon-only {
+				width: 1.8em;
+				height: 1.8em;
+			}
+			#status {
+				font-size: .8em;
+				text-align: right;
+				bottom: .4em;
+				color: #888888;
+			}
+			
+			.step {
+				position: absolute;
+				width: 500px;
+			}
+			#step-introduction {
+				top: 1000px;
+				left: 1000px;
+			}
+			#step-example {
+				top: 1000px;
+				left: 2000px;
+			}
+			#step-combine {
+				top: 1000px;
+				left: 3000px;
+			}
+			#step-form {
+				top: 2000px;
+				left: 1000px;
+			}
+			#step-form table {
+				border-collapse: separate;
+				border-spacing: .5em;
+			}
+			#step-form table tr td:first-child {
+				text-align: right;
+			}
+			#step-fun {
+				top: 2000px;
+				left: 2000px;
+			}
+		</style>
+		
+		<script type="text/javascript" src="lib/jquery-1.8.3.min.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui-1.9.2/jquery-ui-1.9.2.min.js"></script>
+		
+		<script type="text/javascript" src="lib/jquery-ui-tour/jquery.tour.js"></script>
+		<script type="text/javascript" src="lib/jquery-ui-tour/jquery-ui.tour.js"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("html,body").animate({
+					scrollTop: 0,
+					scrollLeft: 0
+				});
+				
+				var step1 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#step-introduction")).manipulations);
+				var step2 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#step-example")).manipulations);
+				var step3 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#scrollTo")).manipulations);
+				var step4 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).expose($("#expose")).manipulations);
+				var step5 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).highlight($("#highlight")).manipulations);
+				var step6 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("#mark"), "1").manipulations);
+				var step7 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).hint($("#hint"), "This should help you").manipulations);
+				var step8 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#step-combine")).manipulations);
+				var step9 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).expose($("#step-combine strong")).hint($("#step-combine strong"), "Look at this!").manipulations);
+				var step10 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#step-form")).manipulations);
+				var step11 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("label[for=first-name]"), "1").hint($("#first-name"), "Enter your first name...").manipulations);
+				var step12 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("label[for=last-name]"), "2").hint($("#last-name"), "...then your last name...").manipulations);
+				var step13 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("label[for=sex]"), "3").hint($("#sex"), "...and select your sex...").manipulations);
+				var step14 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).mark($("#submit"), "4").hint($("#submit"), "...before you submit").manipulations);
+				var step15 = new $.tour.Step((new $.tour.manipulation.ManipulationBuilder()).scrollTo($("#step-fun")).manipulations);
+				var automatictour = new $.tour.AutomaticTour([step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, step11, step12, step13, step14, step15], 3000);
+				var observer = {
+					updateObservable: function(tour, event) {
+						if (event == "play") {
+							$("#status").text("playing, on step " + (automatictour.currentStepIndex + 1));
+						} else if (event == "stop") {
+							$("#status").text("not playing");
+						} else
+						if (event == "pause") {
+							$("#status").text("paused, on step " + (automatictour.currentStepIndex + 1));
+						} else
+						if (event == "forward" || event == "backward") {
+							if (tour.isPlaying()) {
+								$("#status").text("playing, on step " + (automatictour.currentStepIndex + 1));
+							} else {
+								$("#status").text("on step " + (automatictour.currentStepIndex + 1));
+							}
+						}
+					}
+				};
+				automatictour.addObserver(observer);
+				$("#automatictour").automatictour({
+					tour: automatictour
+				});
+				$("#automatictour").children().each(function(index) {
+					if (index == 0) {
+						$(this).attr("title", "Play the tour");
+					} else if (index == 1) {
+						$(this).attr("title", "Pause the tour");
+					} else if (index == 2) {
+						$(this).attr("title", "Stop the tour");
+					} else if (index == 3) {
+						$(this).attr("title", "Go to the next step");
+					} else if (index == 4) {
+						$(this).attr("title", "Go to the previous step");
+					}
+				});
+				$("#control").draggable({
+					handle: "#handle"
+				});
+				
+				$("#submit").button();
+			});
+		</script>
+		
+	</head>
+	
+	<body>
+		
+		<h1>jQuery UI tour</h1>
+		
+		<h2>What can I do with it?</h2>
+		
+		<p>
+			Build interactive tours through your page to showcase the important parts.
+			<br />
+			To present what it can do, just <strong>press play!</strong>
+		</p>
+
+		<div id="control" class="ui-widget ui-widget-content ui-corner-all">
+			<span id="handle" class="ui-corner-all">
+				<span class="ui-icon ui-icon-arrow-4"></span>
+			</span>
+			<span id="automatictour"></span>
+			<p id="status">not playing</p>
+		</div>
+		
+		<div id="step-introduction" class="step">
+			<h2>Manipulations</h2>
+		
+			<p>
+				Manipulate DOM elements to present them in the right light.
+			</p>
+		</div>
+
+		<div id="step-example" class="step">
+			<h2>Possible manipulations</h2>
+			
+			<p>
+				You can center an element with the <code id="scrollTo">ScrollToManipulation</code>.
+				To expose a whole area, use the <code id="expose">ExposeManipulation</code>
+				or the <code id="highlight">HighlightManipulation</code>.
+				If you want to give structure to the tour, use the <code id="mark">MarkManipulation</code>.
+				Maybe you want to explain a little more with the <code id="hint">HintManipulation</code>.
+			</p>
+		</div>
+		
+		<div id="step-combine" class="step">
+			<h2>Combine multiple manipulations</h2>
+			
+			<p>
+				You can use multiple manipulations on the <strong>same step</strong>.
+			</p>
+		</div>
+		
+		
+		<div id="step-form" class="step">
+			<h2>Need a realistic scenario?</h2>
+			
+			<p>
+				Suppose you have a non-trivial for you want to explain a little further.
+				You can do it like this:
+			</p>
+			
+			<table>
+				<tr>
+					<td>
+						<label for="first-name">First name</label>
+					</td>
+					<td>
+						<input type="text" id="first-name" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="last-name">Last name</label>
+					</td>
+					<td>
+						<input type="text" id="last-name" />
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<label for="sex">Sex</label>
+					</td>
+					<td id="sex">
+						<label for="male">male</label> <input type="radio" name="sex" id="male" checked="checked" />
+						<label for="female">female</label> <input type="radio" name="sex" id="female" />
+					</td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<input type="submit" id="submit" value="Submit" />
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		<div id="step-fun" class="step">
+			<h2>Have fun!</h2>
+			
+			<p>
+				To see how this tour is built, use the source of this page.
+				If you find an issue or wish a feature, report it on github.
+				Or you contribute by creating a pull-request.
+			</p>
+		</div>
+		
+	</body>
+	
+</html>
