@@ -1,0 +1,28 @@
+{
+  "name": "jquery-ui-tour",
+  "version": "0.5.0",
+  "description": "Explain your websites with a tour, step by step.",
+  "keywords": [
+    "jquery",
+    "jquery-ui",
+    "tour",
+    "help"
+  ],
+  "author": {
+    "name": "Manuel Leuenberger"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/maenu/jquery-ui-tour.git"
+  },
+  "devDependencies": {
+    "jquery-simula": "git://github.com/maenu/jquery-simula.git",
+    "grunt": "~0.4.0",
+    "grunt-istanbul": "git://github.com/taichi/grunt-istanbul.git",
+    "grunt-contrib-jshint": "~0.1.0",
+    "grunt-contrib-jasmine": "~0.2.0",
+    "grunt-contrib-clean": "~0.4.0a",
+    "grunt-contrib-uglify": "~0.1.0",
+    "grunt-contrib-yuidoc": "~0.3.2"
+  }
+}

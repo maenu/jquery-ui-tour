@@ -1,0 +1,931 @@
+{
+    "project": {
+        "name": "jquery-ui-tour",
+        "description": "Explain your websites with a tour, step by step.",
+        "version": "0.5.0"
+    },
+    "files": {
+        "src/main/js/jquery-tour.js": {
+            "name": "src/main/js/jquery-tour.js",
+            "modules": {
+                "jQuery.tour": 1
+            },
+            "classes": {
+                "Observer": 1,
+                "Observable": 1,
+                "jQuery.tour.Tour": 1,
+                "jQuery.tour.AutomaticTour": 1,
+                "jQuery.tour.Manipulation": 1,
+                "jQuery.tour.Step": 1,
+                "jQuery.tour.JQueryManipulation": 1,
+                "jQuery.tour.ScrollToManipulation": 1,
+                "jQuery.tour.ExposeManipulation": 1,
+                "jQuery.tour.HighlightManipulation": 1,
+                "jQuery.tour.MarkManipulation": 1,
+                "jQuery.tour.HintManipulation": 1,
+                "jQuery.tour.ManipulationBuilder": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/main/js/jquery-ui-tour.js": {
+            "name": "src/main/js/jquery-ui-tour.js",
+            "modules": {
+                "jQuery": 1
+            },
+            "classes": {
+                "jQuery.tour": 1,
+                "jQuery.automatictour": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "jQuery.tour": {
+            "name": "jQuery.tour",
+            "submodules": {},
+            "classes": {
+                "Observer": 1,
+                "Observable": 1,
+                "jQuery.tour.Tour": 1,
+                "jQuery.tour.AutomaticTour": 1,
+                "jQuery.tour.Manipulation": 1,
+                "jQuery.tour.Step": 1,
+                "jQuery.tour.JQueryManipulation": 1,
+                "jQuery.tour.ScrollToManipulation": 1,
+                "jQuery.tour.ExposeManipulation": 1,
+                "jQuery.tour.HighlightManipulation": 1,
+                "jQuery.tour.MarkManipulation": 1,
+                "jQuery.tour.HintManipulation": 1,
+                "jQuery.tour.ManipulationBuilder": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 550,
+            "description": "Utils to make a multi-step, multi-page tour. Must set variable tour before.\nManipulations must have deploy and revert methods.",
+            "author": "Manuel Leuenberger"
+        },
+        "jQuery": {
+            "name": "jQuery",
+            "submodules": {},
+            "classes": {
+                "jQuery.tour": 1,
+                "jQuery.automatictour": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/main/js/jquery-ui-tour.js",
+            "line": 110,
+            "description": "Widgets for a tour.",
+            "author": "Manuel Leuenberger"
+        }
+    },
+    "classes": {
+        "Observer": {
+            "name": "Observer",
+            "shortname": "Observer",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 11,
+            "description": "Creates an Observer.",
+            "access": "private",
+            "tagname": "",
+            "is_constructor": 1
+        },
+        "Observable": {
+            "name": "Observable",
+            "shortname": "Observable",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 29,
+            "description": "Creates an Observable.",
+            "access": "private",
+            "tagname": "",
+            "is_constructor": 1
+        },
+        "jQuery.tour.Tour": {
+            "name": "jQuery.tour.Tour",
+            "shortname": "jQuery.tour.Tour",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 94,
+            "description": "Creates a Tour with the specified steps.",
+            "extends": "Observable",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "steps",
+                    "description": "An array of steps",
+                    "type": "Array"
+                }
+            ]
+        },
+        "jQuery.tour.AutomaticTour": {
+            "name": "jQuery.tour.AutomaticTour",
+            "shortname": "jQuery.tour.AutomaticTour",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 179,
+            "description": "Creates an AutomaticTour with the specified steps.",
+            "extends": "jQuery.tour.Tour",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "steps",
+                    "description": "An array of steps",
+                    "type": "Array"
+                },
+                {
+                    "name": "interval",
+                    "description": "The interval between the steps in milliseconds",
+                    "type": "Number"
+                }
+            ]
+        },
+        "jQuery.tour.Manipulation": {
+            "name": "jQuery.tour.Manipulation",
+            "shortname": "jQuery.tour.Manipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 261,
+            "description": "Creates a Manipulation.",
+            "is_constructor": 1
+        },
+        "jQuery.tour.Step": {
+            "name": "jQuery.tour.Step",
+            "shortname": "jQuery.tour.Step",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 287,
+            "description": "Creates a Step with the specified manipulations.",
+            "extends": "jQuery.tour.Manipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "manipulations",
+                    "description": "The Manipulations",
+                    "type": "Array"
+                }
+            ]
+        },
+        "jQuery.tour.JQueryManipulation": {
+            "name": "jQuery.tour.JQueryManipulation",
+            "shortname": "jQuery.tour.JQueryManipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 319,
+            "description": "Creates a JQueryManipulation on the specified element.",
+            "extends": "jQuery.tour.Manipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "jQuery.tour.ScrollToManipulation": {
+            "name": "jQuery.tour.ScrollToManipulation",
+            "shortname": "jQuery.tour.ScrollToManipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 341,
+            "description": "Creates a ScrollToManipulation. Centers on the specified element.",
+            "extends": "jQuery.tour.JQueryManipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "jQuery.tour.ExposeManipulation": {
+            "name": "jQuery.tour.ExposeManipulation",
+            "shortname": "jQuery.tour.ExposeManipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 375,
+            "description": "Creates an ExposeManipulation.",
+            "extends": "jQuery.tour.JQueryManipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "jQuery.tour.HighlightManipulation": {
+            "name": "jQuery.tour.HighlightManipulation",
+            "shortname": "jQuery.tour.HighlightManipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 421,
+            "description": "Creates a HighlightManipulation.",
+            "extends": "jQuery.tour.JQueryManipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object",
+                    "type": "JQuery"
+                }
+            ]
+        },
+        "jQuery.tour.MarkManipulation": {
+            "name": "jQuery.tour.MarkManipulation",
+            "shortname": "jQuery.tour.MarkManipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 451,
+            "description": "Creates a MarkManipulation.",
+            "extends": "jQuery.tour.JQueryManipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "text",
+                    "description": "A short string",
+                    "type": "String",
+                    "optional": true
+                }
+            ]
+        },
+        "jQuery.tour.HintManipulation": {
+            "name": "jQuery.tour.HintManipulation",
+            "shortname": "jQuery.tour.HintManipulation",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 501,
+            "description": "Creates a HintManipulation.",
+            "extends": "jQuery.tour.JQueryManipulation",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "content",
+                    "description": "The hint text, HTML markup or a jQuery\n    object",
+                    "type": "String|jQuery"
+                }
+            ]
+        },
+        "jQuery.tour.ManipulationBuilder": {
+            "name": "jQuery.tour.ManipulationBuilder",
+            "shortname": "jQuery.tour.ManipulationBuilder",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery.tour",
+            "namespace": "",
+            "file": "src/main/js/jquery-tour.js",
+            "line": 550,
+            "description": "Creates a ManipulationBuilder.",
+            "is_constructor": 1
+        },
+        "jQuery.tour": {
+            "name": "jQuery.tour",
+            "shortname": "jQuery.tour",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery",
+            "namespace": "",
+            "file": "src/main/js/jquery-ui-tour.js",
+            "line": 12,
+            "description": "Controls a Tour. Observers the tour, so it is save to control the tour\nprogrammatically too."
+        },
+        "jQuery.automatictour": {
+            "name": "jQuery.automatictour",
+            "shortname": "jQuery.automatictour",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jQuery",
+            "namespace": "",
+            "file": "src/main/js/jquery-ui-tour.js",
+            "line": 110,
+            "description": "Controls an AutomaticTour.",
+            "extends": "jQuery.tour"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 19,
+            "description": "Called whenever an Observable updates its Observers.",
+            "itemtype": "method",
+            "name": "updateObservable",
+            "params": [
+                {
+                    "name": "observable",
+                    "description": "The Observable",
+                    "type": "Observable"
+                },
+                {
+                    "name": "args",
+                    "description": "The arguments passed by the observable",
+                    "type": "Object"
+                }
+            ],
+            "class": "Observer",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 37,
+            "description": "The Observers.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "observers",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "Observable",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 47,
+            "description": "Updates all Observers this the specified arguments.",
+            "itemtype": "method",
+            "name": "updateObservable",
+            "params": [
+                {
+                    "name": "args",
+                    "description": "The arguments to pass to the Observers",
+                    "type": "Object"
+                }
+            ],
+            "class": "Observable",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 59,
+            "description": "Adds an Observer. If it is already registered, it will not be added\nagain.",
+            "itemtype": "method",
+            "name": "addObserver",
+            "params": [
+                {
+                    "name": "observer",
+                    "description": "The observer to add",
+                    "type": "Observer"
+                }
+            ],
+            "class": "Observable",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 76,
+            "description": "Removes an Observer. If it is not already registered, it will not have no\neffect.",
+            "itemtype": "method",
+            "name": "removeObserver",
+            "params": [
+                {
+                    "name": "observer",
+                    "description": "The observer to remove",
+                    "type": "Observer"
+                }
+            ],
+            "class": "Observable",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 105,
+            "description": "The Steps.",
+            "itemtype": "property",
+            "name": "steps",
+            "type": "{Array}",
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 112,
+            "description": "The index of the current step.",
+            "itemtype": "property",
+            "name": "currentStepIndex",
+            "type": "{Number}",
+            "default": "-1",
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 123,
+            "description": "Reverts the current step.",
+            "itemtype": "method",
+            "name": "revertCurrentStep",
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 134,
+            "description": "Goes one step forward.",
+            "itemtype": "method",
+            "name": "forward",
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 146,
+            "description": "Goes one step backward.",
+            "itemtype": "method",
+            "name": "backward",
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 158,
+            "description": "Checks if it can go one step forward.",
+            "itemtype": "method",
+            "name": "canForward",
+            "return": {
+                "description": "true if it can, false otherwise",
+                "type": "Boolean"
+            },
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 168,
+            "description": "Checks if it can go one step backward.",
+            "itemtype": "method",
+            "name": "canBackward",
+            "return": {
+                "description": "true if it can, false otherwise",
+                "type": "Boolean"
+            },
+            "class": "jQuery.tour.Tour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 191,
+            "description": "The interval duration in milliseconds.",
+            "itemtype": "property",
+            "name": "interval",
+            "type": "{Number}",
+            "class": "jQuery.tour.AutomaticTour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 198,
+            "description": "The interval id.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "intervalId",
+            "type": "{Number}",
+            "default": "null",
+            "class": "jQuery.tour.AutomaticTour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 210,
+            "description": "Plays it from the point where it was stopped last.",
+            "itemtype": "method",
+            "name": "play",
+            "class": "jQuery.tour.AutomaticTour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 226,
+            "description": "Pauses it.",
+            "itemtype": "method",
+            "name": "pause",
+            "class": "jQuery.tour.AutomaticTour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 236,
+            "description": "Stops it.",
+            "itemtype": "method",
+            "name": "stop",
+            "class": "jQuery.tour.AutomaticTour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 250,
+            "description": "Checks if it is playing.",
+            "itemtype": "method",
+            "name": "isPlaying",
+            "return": {
+                "description": "true if it is, false otherwise",
+                "type": "Boolean"
+            },
+            "class": "jQuery.tour.AutomaticTour",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 270,
+            "description": "Deploys it.",
+            "itemtype": "method",
+            "name": "deploy",
+            "class": "jQuery.tour.Manipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 278,
+            "description": "Reverts it.",
+            "itemtype": "method",
+            "name": "revert",
+            "class": "jQuery.tour.Manipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 298,
+            "description": "The Manipulations.",
+            "itemtype": "property",
+            "name": "manipulations",
+            "type": "{Array}",
+            "class": "jQuery.tour.Step",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 330,
+            "description": "The element to manipulate.",
+            "itemtype": "property",
+            "name": "$element",
+            "type": "{jQuery}",
+            "class": "jQuery.tour.JQueryManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 386,
+            "description": "The cover for the body.",
+            "class": "jQuery.tour.ExposeManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 393,
+            "description": "The CSS classes that will be applied to the cover element.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "COVER_CLASSES",
+            "type": "{STRING}",
+            "default": "\"tour-manipulation-expose-cover\"",
+            "class": "jQuery.tour.ExposeManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 402,
+            "description": "The CSS classes that will be applied to the exposed element.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "CLASSES",
+            "type": "{STRING}",
+            "default": "\"tour-manipulation-expose\"",
+            "class": "jQuery.tour.ExposeManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 435,
+            "description": "The CSS classes that will be applied to the highlighted element.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "CLASSES",
+            "type": "{STRING}",
+            "default": "\"tour-manipulation-highlight\"",
+            "class": "jQuery.tour.HighlightManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 463,
+            "description": "The mark.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "$mark",
+            "type": "{jQuery}",
+            "default": "$(\"<span>\")",
+            "class": "jQuery.tour.MarkManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 479,
+            "description": "The CSS classes that will be applied to the marked element.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "CLASSES",
+            "type": "{STRING}",
+            "default": "\"tour-manipulation-mark\"",
+            "class": "jQuery.tour.MarkManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 514,
+            "description": "The hint.",
+            "access": "private",
+            "tagname": "",
+            "itemtype": "property",
+            "name": "$hint",
+            "type": "{jQuery}",
+            "default": "$(\"<div>\")",
+            "class": "jQuery.tour.HintManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 528,
+            "description": "The CSS classes that will be applied to the marked element.",
+            "static": 1,
+            "itemtype": "property",
+            "name": "CLASSES",
+            "type": "{STRING}",
+            "default": "\"tour-manipulation-hint\"",
+            "class": "jQuery.tour.HintManipulation",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 557,
+            "description": "The collected Manipulations.",
+            "itemtype": "property",
+            "name": "manipulations",
+            "type": "{Array}",
+            "default": "[]",
+            "class": "jQuery.tour.ManipulationBuilder",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 566,
+            "description": "Scrolls to the specified element.",
+            "itemtype": "method",
+            "name": "scrollTo",
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object to scroll to",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "The ManipulationBuilder itself",
+                "type": "ManipulationBuilder"
+            },
+            "class": "jQuery.tour.ManipulationBuilder",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 579,
+            "description": "Exposes the specified element.",
+            "itemtype": "method",
+            "name": "expose",
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object to expose",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "The ManipulationBuilder itself",
+                "type": "ManipulationBuilder"
+            },
+            "class": "jQuery.tour.ManipulationBuilder",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 592,
+            "description": "Highlights the specified element.",
+            "itemtype": "method",
+            "name": "highlight",
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object to highlight",
+                    "type": "JQuery"
+                }
+            ],
+            "return": {
+                "description": "The ManipulationBuilder itself",
+                "type": "ManipulationBuilder"
+            },
+            "class": "jQuery.tour.ManipulationBuilder",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 605,
+            "description": "Marks the specified element.",
+            "itemtype": "method",
+            "name": "mark",
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object to mark",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "text",
+                    "description": "A short string",
+                    "type": "String",
+                    "optional": true
+                }
+            ],
+            "return": {
+                "description": "The ManipulationBuilder itself",
+                "type": "ManipulationBuilder"
+            },
+            "class": "jQuery.tour.ManipulationBuilder",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-tour.js",
+            "line": 619,
+            "description": "Makes a hint for the specified element.",
+            "itemtype": "method",
+            "name": "hint",
+            "params": [
+                {
+                    "name": "$element",
+                    "description": "A jQuery object to show a hint for",
+                    "type": "JQuery"
+                },
+                {
+                    "name": "content",
+                    "description": "The hint text, HTML markup or a jQuery\n    object",
+                    "type": "String|jQuery"
+                }
+            ],
+            "return": {
+                "description": "The ManipulationBuilder itself",
+                "type": "ManipulationBuilder"
+            },
+            "class": "jQuery.tour.ManipulationBuilder",
+            "module": "jQuery.tour"
+        },
+        {
+            "file": "src/main/js/jquery-ui-tour.js",
+            "line": 20,
+            "description": "Required, the Tour to control.",
+            "itemtype": "property",
+            "name": "tour",
+            "type": "{Tour}",
+            "class": "jQuery.tour",
+            "module": "jQuery"
+        },
+        {
+            "file": "src/main/js/jquery-ui-tour.js",
+            "line": 28,
+            "description": "Creates a tour.",
+            "itemtype": "method",
+            "name": "tour",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "The options, must contain a \"tour\" property",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "jQuery.tour",
+            "module": "jQuery"
+        },
+        {
+            "file": "src/main/js/jquery-ui-tour.js",
+            "line": 117,
+            "description": "Creates an automatictour.",
+            "itemtype": "method",
+            "name": "automatictour",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "options",
+                    "description": "The options, must contain a \"tour\" property",
+                    "type": "Object",
+                    "optional": true
+                }
+            ],
+            "class": "jQuery.automatictour",
+            "module": "jQuery"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type\nThe cover for the body.",
+            "line": " src/main/js/jquery-tour.js:386"
+        }
+    ]
+}

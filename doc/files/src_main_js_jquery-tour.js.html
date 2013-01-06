@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src&#x2F;main&#x2F;js&#x2F;jquery-tour.js - jquery-ui-tour</title>
+    <link rel="stylesheet" href="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;3.8.0pr2&#x2F;build&#x2F;cssgrids&#x2F;cssgrids-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="..&#x2F;assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="..&#x2F;assets/favicon.png">
+    <script src="http:&#x2F;&#x2F;yui.yahooapis.com&#x2F;combo?3.8.0pr2&#x2F;build&#x2F;yui&#x2F;yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="..&#x2F;assets/css/logo.png" title="jquery-ui-tour"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.5.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+                <li><a href="..&#x2F;classes/jQuery.automatictour.html">jQuery.automatictour</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.html">jQuery.tour</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.AutomaticTour.html">jQuery.tour.AutomaticTour</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.ExposeManipulation.html">jQuery.tour.ExposeManipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.HighlightManipulation.html">jQuery.tour.HighlightManipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.HintManipulation.html">jQuery.tour.HintManipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.JQueryManipulation.html">jQuery.tour.JQueryManipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.Manipulation.html">jQuery.tour.Manipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.ManipulationBuilder.html">jQuery.tour.ManipulationBuilder</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.MarkManipulation.html">jQuery.tour.MarkManipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.ScrollToManipulation.html">jQuery.tour.ScrollToManipulation</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.Step.html">jQuery.tour.Step</a></li>
+            
+                <li><a href="..&#x2F;classes/jQuery.tour.Tour.html">jQuery.tour.Tour</a></li>
+            
+                <li><a href="..&#x2F;classes/Observable.html">Observable</a></li>
+            
+                <li><a href="..&#x2F;classes/Observer.html">Observer</a></li>
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+                <li><a href="..&#x2F;modules/jQuery.html">jQuery</a></li>
+            
+                <li><a href="..&#x2F;modules/jQuery.tour.html">jQuery.tour</a></li>
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src&#x2F;main&#x2F;js&#x2F;jquery-tour.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+&#x2F;**
+ * Utils to make a multi-step, multi-page tour. Must set variable tour before.
+ * Manipulations must have deploy and revert methods.
+ *
+ * @author Manuel Leuenberger
+ * @module jQuery.tour
+ *&#x2F;
+
+(function ($, undefined) {
+	
+	&#x2F;**
+	 * Creates an Observer.
+	 *
+	 * @private
+	 * @class Observer
+	 * @constructor
+	 *&#x2F;
+	function Observer() {}
+	&#x2F;**
+	 * Called whenever an Observable updates its Observers.
+	 *
+	 * @method updateObservable
+	 *
+	 * @param {Observable} observable The Observable
+	 * @param {Object} args The arguments passed by the observable
+	 *&#x2F;
+	Observer.prototype.updateObservable = function () {};
+	
+	&#x2F;**
+	 * Creates an Observable.
+	 *
+	 * @private
+	 * @class Observable
+	 * @constructor
+	 *&#x2F;
+	function Observable() {
+		&#x2F;**
+		 * The Observers.
+		 *
+		 * @private
+		 * @property observers
+		 * @type {Array}
+		 * @default []
+		 *&#x2F;
+		this.observers = [];
+	}
+	&#x2F;**
+	 * Updates all Observers this the specified arguments.
+	 *
+	 * @method updateObservable
+	 *
+	 * @param {Object} args The arguments to pass to the Observers
+	 *&#x2F;
+	Observable.prototype.updateObservers = function (args) {
+		for (var i = 0; i &lt; this.observers.length; i++) {
+			this.observers[i].updateObservable(this, args);
+		}
+	};
+	&#x2F;**
+	 * Adds an Observer. If it is already registered, it will not be added
+	 * again.
+	 *
+	 * @method addObserver
+	 *
+	 * @param {Observer} observer The observer to add
+	 *&#x2F;
+	Observable.prototype.addObserver = function (observer) {
+		for (var i = 0; i &lt; this.observers.length; i++) {
+			var registered = this.observers[i];
+			if (registered == observer) {
+				return;
+			}
+		}
+		this.observers.push(observer);
+	};
+	&#x2F;**
+	 * Removes an Observer. If it is not already registered, it will not have no
+	 * effect.
+	 *
+	 * @method removeObserver
+	 *
+	 * @param {Observer} observer The observer to remove
+	 *&#x2F;
+	Observable.prototype.removeObserver = function (observer) {
+		for (var i = 0; i &lt; this.observers.length; i++) {
+			var registered = this.observers[i];
+			if (registered == observer) {
+				this.observers.splice(i, 1);
+				return;
+			}
+		}
+	};
+	
+	&#x2F;**
+	 * Creates a Tour with the specified steps.
+	 *
+	 * @class jQuery.tour.Tour
+	 * @extends Observable
+	 * @constructor
+	 *
+	 * @param {Array} steps An array of steps
+	 *&#x2F;
+	function Tour(steps) {
+		Observable.apply(this);
+		&#x2F;**
+		 * The Steps.
+		 *
+		 * @property steps
+		 * @type {Array}
+		 *&#x2F;
+		this.steps = steps;
+		&#x2F;**
+		 * The index of the current step.
+		 *
+		 * @property currentStepIndex
+		 * @type {Number}
+		 * @default -1
+		 *&#x2F;
+		this.currentStepIndex = -1;
+	}
+	Tour.prototype = new Observable();
+	Tour.prototype.constructor = Tour;
+	&#x2F;**
+	 * Reverts the current step.
+	 *
+	 * @method revertCurrentStep
+	 *&#x2F;
+	Tour.prototype.revertCurrentStep = function () {
+		if (this.currentStepIndex &gt;= 0
+				&amp;&amp; this.currentStepIndex &lt; this.steps.length) {
+			this.steps[this.currentStepIndex].revert();
+		}
+	};
+	&#x2F;**
+	 * Goes one step forward.
+	 *
+	 * @method forward
+	 *&#x2F;
+	Tour.prototype.forward = function () {
+		if (this.currentStepIndex &gt;= 0) {
+			this.steps[this.currentStepIndex].revert();
+		}
+		this.steps[++this.currentStepIndex].deploy();
+		this.updateObservers(&#x27;forward&#x27;);
+	};
+	&#x2F;**
+	 * Goes one step backward.
+	 *
+	 * @method backward
+	 *&#x2F;
+	Tour.prototype.backward = function () {
+		if (this.currentStepIndex &lt; this.steps.length) {
+			this.steps[this.currentStepIndex].revert();
+		}
+		this.steps[--this.currentStepIndex].deploy();
+		this.updateObservers(&#x27;backward&#x27;);
+	};
+	&#x2F;**
+	 * Checks if it can go one step forward.
+	 *
+	 * @method canForward
+	 *
+	 * @return {Boolean} true if it can, false otherwise
+	 *&#x2F;
+	Tour.prototype.canForward = function () {
+		return this.currentStepIndex &lt; this.steps.length - 1;
+	};
+	&#x2F;**
+	 * Checks if it can go one step backward.
+	 *
+	 * @method canBackward
+	 *
+	 * @return {Boolean} true if it can, false otherwise
+	 *&#x2F;
+	Tour.prototype.canBackward = function () {
+		return this.currentStepIndex &gt; 0;
+	};
+	
+	&#x2F;**
+	 * Creates an AutomaticTour with the specified steps.
+	 *
+	 * @class jQuery.tour.AutomaticTour
+	 * @extends jQuery.tour.Tour
+	 * @constructor
+	 *
+	 * @param {Array} steps An array of steps
+	 * @param {Number} interval The interval between the steps in milliseconds
+	 *&#x2F;
+	function AutomaticTour(steps, interval) {
+		Tour.apply(this, [steps]);
+		&#x2F;**
+		 * The interval duration in milliseconds.
+		 *
+		 * @property interval
+		 * @type {Number}
+		 *&#x2F;
+		this.interval = interval;
+		&#x2F;**
+		 * The interval id.
+		 *
+		 * @private
+		 * @property intervalId
+		 * @type {Number}
+		 * @default null
+		 *&#x2F;
+		this.intervalId = null;
+	}
+	AutomaticTour.prototype = new Tour();
+	AutomaticTour.prototype.constructor = AutomaticTour;
+	&#x2F;**
+	 * Plays it from the point where it was stopped last.
+	 *
+	 * @method play
+	 *&#x2F;
+	AutomaticTour.prototype.play = function () {
+		this.forward();
+		this.intervalId = setInterval($.proxy(function () {
+				if (this.canForward()) {
+					this.forward();
+				} else {
+					this.stop();
+				}
+			}, this), this.interval);
+		this.updateObservers(&#x27;play&#x27;);
+	};
+	&#x2F;**
+	 * Pauses it.
+	 *
+	 * @method pause
+	 *&#x2F;
+	AutomaticTour.prototype.pause = function () {
+		clearInterval(this.intervalId);
+		this.intervalId = null;
+		this.updateObservers(&#x27;pause&#x27;);
+	};
+	&#x2F;**
+	 * Stops it.
+	 *
+	 * @method stop
+	 *&#x2F;
+	AutomaticTour.prototype.stop = function () {
+		if (this.isPlaying()) {
+			clearInterval(this.intervalId);
+			this.intervalId = null;
+		}
+		this.revertCurrentStep();
+		this.currentStepIndex = -1;
+		this.updateObservers(&#x27;stop&#x27;);
+	};
+	&#x2F;**
+	 * Checks if it is playing.
+	 *
+	 * @method isPlaying
+	 *
+	 * @return {Boolean} true if it is, false otherwise
+	 *&#x2F;
+	AutomaticTour.prototype.isPlaying = function () {
+		return this.intervalId != null;
+	};
+	
+	&#x2F;**
+	 * Creates a Manipulation.
+	 *
+	 * @class jQuery.tour.Manipulation
+	 * @constructor
+	 *&#x2F;
+	function Manipulation() {
+		
+	}
+	&#x2F;**
+	 * Deploys it.
+	 *
+	 * @method deploy
+	 *&#x2F;
+	Manipulation.prototype.deploy = function () {
+		
+	};
+	&#x2F;**
+	 * Reverts it.
+	 *
+	 * @method revert
+	 *&#x2F;
+	Manipulation.prototype.revert = function () {
+		
+	};
+	
+	&#x2F;**
+	 * Creates a Step with the specified manipulations.
+	 *
+	 * @class jQuery.tour.Step
+	 * @extends jQuery.tour.Manipulation
+	 * @constructor
+	 *
+	 * @param {Array} manipulations The Manipulations
+	 *&#x2F;
+	function Step(manipulations) {
+		Manipulation.apply(this);
+		&#x2F;**
+		 * The Manipulations.
+		 *
+		 * @property manipulations
+		 * @type {Array}
+		 *&#x2F;
+		this.manipulations = manipulations;
+	}
+	Step.prototype = new Manipulation();
+	Step.prototype.constructor = Step;
+	Step.prototype.deploy = function () {
+		for (var i = 0; i &lt; this.manipulations.length; i++) {
+			this.manipulations[i].deploy();
+		}
+	};
+	Step.prototype.revert = function () {
+		for (var i = 0; i &lt; this.manipulations.length; i++) {
+			this.manipulations[i].revert();
+		}
+	};
+	
+	&#x2F;**
+	 * Creates a JQueryManipulation on the specified element.
+	 *
+	 * @class jQuery.tour.JQueryManipulation
+	 * @extends jQuery.tour.Manipulation
+	 * @constructor
+	 *
+	 * @param {jQuery} $element A jQuery object
+	 *&#x2F;
+	function JQueryManipulation($element) {
+		Manipulation.apply(this);
+		&#x2F;**
+		 * The element to manipulate.
+		 *
+		 * @property $element
+		 * @type {jQuery}
+		 *&#x2F;
+		this.$element = $element;
+	}
+	JQueryManipulation.prototype = new Manipulation();
+	JQueryManipulation.prototype.constructor = JQueryManipulation;
+	
+	&#x2F;**
+	 * Creates a ScrollToManipulation. Centers on the specified element.
+	 *
+	 * @class jQuery.tour.ScrollToManipulation
+	 * @extends jQuery.tour.JQueryManipulation
+	 * @constructor
+	 *
+	 * @param {jQuery} $element A jQuery object
+	 *&#x2F;
+	function ScrollToManipulation($element) {
+		JQueryManipulation.apply(this, [$element]);
+	}
+	ScrollToManipulation.prototype = new JQueryManipulation();
+	ScrollToManipulation.prototype.constructor = ScrollToManipulation;
+	ScrollToManipulation.prototype.deploy = function () {
+		var viewportSize = {
+			width: $(window).width(),
+			height: $(window).height()
+		};
+		var elementSize = {
+			width: this.$element.width(),
+			height: this.$element.height()
+		};
+		var elementOffset = this.$element.offset();
+		$(&#x27;html,body&#x27;).animate({
+			scrollLeft: elementOffset.left
+				+ (elementSize.width - viewportSize.width) &#x2F; 2,
+			scrollTop: elementOffset.top
+				+ (elementSize.height - viewportSize.height) &#x2F; 2
+		}, {
+			duration: 500
+		});
+	};
+	
+	&#x2F;**
+	 * Creates an ExposeManipulation.
+	 *
+	 * @class jQuery.tour.ExposeManipulation
+	 * @extends jQuery.tour.JQueryManipulation
+	 * @constructor
+	 *
+	 * @param {jQuery} $element A jQuery object
+	 *&#x2F;
+	function ExposeManipulation($element) {
+		JQueryManipulation.apply(this, [$element]);
+		&#x2F;**
+		 * The cover for the body.
+		 *&#x2F;
+		this.$cover = null;
+	}
+	ExposeManipulation.prototype = new JQueryManipulation();
+	ExposeManipulation.prototype.constructor = ScrollToManipulation;
+	&#x2F;**
+	 * The CSS classes that will be applied to the cover element.
+	 *
+	 * @static
+	 * @property COVER_CLASSES
+	 * @type {STRING}
+	 * @default &quot;tour-manipulation-expose-cover&quot;
+	 *&#x2F;
+	ExposeManipulation.COVER_CLASSES = &#x27;tour-manipulation-expose-cover&#x27;;
+	&#x2F;**
+	 * The CSS classes that will be applied to the exposed element.
+	 *
+	 * @static
+	 * @property CLASSES
+	 * @type {STRING}
+	 * @default &quot;tour-manipulation-expose&quot;
+	 *&#x2F;
+	ExposeManipulation.CLASSES = &#x27;tour-manipulation-expose&#x27;;
+	ExposeManipulation.prototype.deploy = function () {
+		this.$element.addClass(ExposeManipulation.CLASSES);
+		this.$cover = $(&#x27;&lt;div&gt;&#x27;).appendTo($(&#x27;body&#x27;)).addClass(
+				ExposeManipulation.COVER_CLASSES);
+	};
+	ExposeManipulation.prototype.revert = function () {
+		this.$element.removeClass(ExposeManipulation.CLASSES);
+		this.$cover.remove();
+	};
+	
+	&#x2F;**
+	 * Creates a HighlightManipulation.
+	 *
+	 * @class jQuery.tour.HighlightManipulation
+	 * @extends jQuery.tour.JQueryManipulation
+	 * @constructor
+	 *
+	 * @param {jQuery} $element A jQuery object
+	 *&#x2F;
+	function HighlightManipulation($element) {
+		JQueryManipulation.apply(this, [$element]);
+	}
+	HighlightManipulation.prototype = new JQueryManipulation();
+	HighlightManipulation.prototype.constructor = HighlightManipulation;
+	&#x2F;**
+	 * The CSS classes that will be applied to the highlighted element.
+	 *
+	 * @static
+	 * @property CLASSES
+	 * @type {STRING}
+	 * @default &quot;tour-manipulation-highlight&quot;
+	 *&#x2F;
+	HighlightManipulation.CLASSES = &#x27;tour-manipulation-highlight&#x27;;
+	HighlightManipulation.prototype.deploy = function () {
+		this.$element.addClass(HighlightManipulation.CLASSES);
+	};
+	HighlightManipulation.prototype.revert = function () {
+		this.$element.removeClass(HighlightManipulation.CLASSES);
+	};
+	
+	&#x2F;**
+	 * Creates a MarkManipulation.
+	 *
+	 * @class jQuery.tour.MarkManipulation
+	 * @extends jQuery.tour.JQueryManipulation
+	 * @constructor
+	 *
+	 * @param {jQuery} $element A jQuery object
+	 * @param {String} [text] A short string
+	 *&#x2F;
+	function MarkManipulation($element, text) {
+		JQueryManipulation.apply(this, [$element]);
+		&#x2F;**
+		 * The mark.
+		 *
+		 * @private
+		 * @property $mark
+		 * @type {jQuery}
+		 * @default $(&quot;&lt;span&gt;&quot;)
+		 *&#x2F;
+		this.$mark = $(&#x27;&lt;span&gt;&#x27;);
+		if (text != null) {
+			this.$mark.text(text);
+		}
+		this.$mark.addClass(MarkManipulation.CLASSES);
+	}
+	MarkManipulation.prototype = new JQueryManipulation();
+	MarkManipulation.prototype.constructor = MarkManipulation;
+	&#x2F;**
+	 * The CSS classes that will be applied to the marked element.
+	 *
+	 * @static
+	 * @property CLASSES
+	 * @type {STRING}
+	 * @default &quot;tour-manipulation-mark&quot;
+	 *&#x2F;
+	MarkManipulation.CLASSES = &#x27;tour-manipulation-mark&#x27;;
+	MarkManipulation.prototype.deploy = function () {
+		this.$mark.appendTo($(&#x27;body&#x27;));
+		this.$mark.offset({
+			top: this.$element.offset().top
+					+ parseFloat(this.$mark.css(&#x27;margin-top&#x27;)),
+			left: this.$element.offset().left
+					+ parseFloat(this.$mark.css(&#x27;margin-left&#x27;))
+		});
+	};
+	MarkManipulation.prototype.revert = function () {
+		this.$mark.remove();
+	};
+	
+	&#x2F;**
+	 * Creates a HintManipulation.
+	 *
+	 * @class jQuery.tour.HintManipulation
+	 * @extends jQuery.tour.JQueryManipulation
+	 * @constructor
+	 *
+	 * @param {jQuery} $element A jQuery object
+	 * @param {String|jQuery} content The hint text, HTML markup or a jQuery
+	 *     object
+	 *&#x2F;
+	function HintManipulation($element, content) {
+		JQueryManipulation.apply(this, [$element]);
+		&#x2F;**
+		 * The hint.
+		 *
+		 * @private
+		 * @property $hint
+		 * @type {jQuery}
+		 * @default $(&quot;&lt;div&gt;&quot;)
+		 *&#x2F;
+		this.$hint = $(&#x27;&lt;div&gt;&#x27;);
+		this.$hint.append(content);
+		this.$hint.addClass(HintManipulation.CLASSES);
+	}
+	HintManipulation.prototype = new JQueryManipulation();
+	HintManipulation.prototype.constructor = HintManipulation;
+	&#x2F;**
+	 * The CSS classes that will be applied to the marked element.
+	 *
+	 * @static
+	 * @property CLASSES
+	 * @type {STRING}
+	 * @default &quot;tour-manipulation-hint&quot;
+	 *&#x2F;
+	HintManipulation.CLASSES = &#x27;tour-manipulation-hint&#x27;;
+	HintManipulation.prototype.deploy = function () {
+		this.$hint.appendTo($(&#x27;body&#x27;));
+		this.$hint.offset({
+			top: this.$element.offset().top
+					+ parseFloat(this.$hint.css(&#x27;margin-top&#x27;))
+					+ this.$element.outerHeight(),
+			left: this.$element.offset().left
+		});
+	};
+	HintManipulation.prototype.revert = function () {
+		this.$hint.remove();
+	};
+	
+	&#x2F;**
+	 * Creates a ManipulationBuilder.
+	 *
+	 * @class jQuery.tour.ManipulationBuilder
+	 * @constructor
+	 *&#x2F;
+	function ManipulationBuilder() {
+		&#x2F;**
+		 * The collected Manipulations.
+		 *
+		 * @property manipulations
+		 * @type {Array}
+		 * @default []
+		 *&#x2F;
+		this.manipulations = [];
+	}
+	&#x2F;**
+	 * Scrolls to the specified element.
+	 *
+	 * @method scrollTo
+	 *
+	 * @param {jQuery} $element A jQuery object to scroll to
+	 *
+	 * @return {ManipulationBuilder} The ManipulationBuilder itself
+	 *&#x2F;
+	ManipulationBuilder.prototype.scrollTo = function ($element) {
+		this.manipulations.push(new ScrollToManipulation($element));
+		return this;
+	};
+	&#x2F;**
+	 * Exposes the specified element.
+	 *
+	 * @method expose
+	 *
+	 * @param {jQuery} $element A jQuery object to expose
+	 *
+	 * @return {ManipulationBuilder} The ManipulationBuilder itself
+	 *&#x2F;
+	ManipulationBuilder.prototype.expose = function ($element) {
+		this.manipulations.push(new ExposeManipulation($element));
+		return this;
+	};
+	&#x2F;**
+	 * Highlights the specified element.
+	 *
+	 * @method highlight
+	 *
+	 * @param {jQuery} $element A jQuery object to highlight
+	 *
+	 * @return {ManipulationBuilder} The ManipulationBuilder itself
+	 *&#x2F;
+	ManipulationBuilder.prototype.highlight = function ($element) {
+		this.manipulations.push(new HighlightManipulation($element));
+		return this;
+	};
+	&#x2F;**
+	 * Marks the specified element.
+	 *
+	 * @method mark
+	 *
+	 * @param {jQuery} $element A jQuery object to mark
+	 * @param {String} [text] A short string
+	 *
+	 * @return {ManipulationBuilder} The ManipulationBuilder itself
+	 *&#x2F;
+	ManipulationBuilder.prototype.mark = function ($element, text) {
+		this.manipulations.push(new MarkManipulation($element, text));
+		return this;
+	};
+	&#x2F;**
+	 * Makes a hint for the specified element.
+	 *
+	 * @method hint
+	 *
+	 * @param {jQuery} $element A jQuery object to show a hint for
+	 * @param {String|jQuery} content The hint text, HTML markup or a jQuery
+	 *     object
+	 *
+	 * @return {ManipulationBuilder} The ManipulationBuilder itself
+	 *&#x2F;
+	ManipulationBuilder.prototype.hint = function ($element, content) {
+		this.manipulations.push(new HintManipulation($element, content));
+		return this;
+	};
+	
+	$.tour = {};
+	$.tour.Tour = Tour;
+	$.tour.AutomaticTour = AutomaticTour;
+	$.tour.Step = Step;
+	$.tour.manipulation = {};
+	$.tour.manipulation.Manipulation = Manipulation;
+	$.tour.manipulation.JQueryManipulation = JQueryManipulation;
+	$.tour.manipulation.ScrollToManipulation = ScrollToManipulation;
+	$.tour.manipulation.ExposeManipulation = ExposeManipulation;
+	$.tour.manipulation.HighlightManipulation = HighlightManipulation;
+	$.tour.manipulation.MarkManipulation = MarkManipulation;
+	$.tour.manipulation.HintManipulation = HintManipulation;
+	$.tour.manipulation.ManipulationBuilder = ManipulationBuilder;
+	
+}(jQuery));
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="..&#x2F;assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="..&#x2F;assets/js/yui-prettify.js"></script>
+<script src="..&#x2F;assets/../api.js"></script>
+<script src="..&#x2F;assets/js/api-filter.js"></script>
+<script src="..&#x2F;assets/js/api-list.js"></script>
+<script src="..&#x2F;assets/js/api-search.js"></script>
+<script src="..&#x2F;assets/js/apidocs.js"></script>
+</body>
+</html>
