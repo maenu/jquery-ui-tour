@@ -11,7 +11,9 @@ module.exports = function(grunt) {
 				temporary: 'bin/temporary'
 			},
 			doc: 'doc',
-			lib: 'lib',
+			lib: {
+				main: 'lib/main'
+			},
 			banner: '/**\n'
 					+ ' * <%= meta.package.name %> v<%= meta.package.version %>\n'
 					+ ' * built on ' + '<%= grunt.template.today("dd.mm.yyyy") %>\n'
@@ -24,33 +26,23 @@ module.exports = function(grunt) {
 			doc: 'doc'
 		},
 		jasmine: {
-			src: '<%= meta.src.main %>/js/*.js',
-			coverage: '<%= meta.bin.coverage %>/<%= meta.src.main %>/js/*.js',
-			options: {
-				vendor: [
-					'<%= meta.lib %>/jquery-1.8.3.min.js',
-					'node_modules/jquery-simula/jquery-simula-0.4.0.min.js',
-					'<%= meta.lib %>/jquery-ui-1.9.2/jquery-ui-1.9.2.min.js'],
-				template: '<%= meta.src.test %>/html/Coverage.tmpl',
-				specs: '<%= meta.src.test %>/js/*.js'
-			}
-		},
-		instrument : {
-			files : '<%= meta.src.main %>/js/*.js',
-			options : {
-				basePath : '<%= meta.bin.coverage %>'
-			}
-		},
-		storeCoverage : {
-			options : {
-				dir : '<%= meta.bin.coverage %>'
-			}
-		},
-		makeReport : {
-			src : '<%= meta.bin.coverage %>/*.json',
-			options : {
-				type : 'lcov',
-				dir : '<%= meta.bin.coverage %>'
+			coverage: {
+				src: '<%= meta.src.main %>/js/*.js',
+				options: {
+					specs: '<%= meta.src.test %>/js/*.js',
+					css: ['<%= meta.lib.main %>/css/reset.css',
+						'<%= meta.src.main %>/css/jquery-tour.css',
+						'<%= meta.src.main %>/css/jquery-ui-tour.css'],
+					vendor: [
+						'<%= meta.lib.main %>/js/jquery-1.8.3.min.js',
+						'<%= meta.lib.main %>/js/jquery-ui-1.9.2/jquery-ui-1.9.2.min.js',
+						'node_modules/jquery-simula/jquery-simula-0.4.0.min.js'],
+					template: require('grunt-template-jasmine-istanbul'),
+					templateOptions: {
+						coverage: '<%= meta.bin.coverage %>/coverage.json',
+						report: '<%= meta.bin.coverage %>'
+					}
+				}
 			}
 		},
 		uglify: {
@@ -170,7 +162,6 @@ module.exports = function(grunt) {
 		}
 	});
 	
-	grunt.loadNpmTasks('grunt-istanbul');
 	grunt.loadNpmTasks('grunt-contrib-jasmine');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-clean');
@@ -180,14 +171,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-css');
 	
 	grunt.registerTask('check', ['jshint:main', 'jshint:test', 'csslint:src']);
-	grunt.registerTask('test', 'jasmine:src');
-	grunt.registerTask('coverage', ['instrument', 'jasmine:coverage',
-			'storeCoverage', 'makeReport']);
-	grunt.registerTask('min', ['uglify:min', 'concat:css', 'cssmin:min']);	
+	grunt.registerTask('test:coverage', 'jasmine:coverage');
+	grunt.registerTask('min', ['uglify:min', 'concat:css', 'cssmin:min']);
 	grunt.registerTask('doc', 'yuidoc');
-	
-	// needed to make grunt-istanbul storeReport
-	grunt.event.on('jasmine.coverage', function (coverage) {
-		global.__coverage__ = coverage
-	});
 };

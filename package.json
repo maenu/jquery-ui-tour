@@ -1,7 +1,7 @@
 {
   "name": "jquery-ui-tour",
   "version": "0.5.0",
-  "description": "Explain your websites with a tour, step by step.",
+  "description": "Explain your websites with a tour, step by step",
   "keywords": [
     "jquery",
     "jquery-ui",
@@ -17,14 +17,14 @@
   },
   "devDependencies": {
     "jquery-simula": "git://github.com/maenu/jquery-simula.git",
-    "grunt": "~0.4.0",
-    "grunt-istanbul": "git://github.com/taichi/grunt-istanbul.git",
-    "grunt-contrib-jshint": "~0.1.0",
-    "grunt-contrib-jasmine": "~0.2.0",
-    "grunt-contrib-clean": "~0.4.0a",
-    "grunt-contrib-uglify": "~0.1.0",
-    "grunt-contrib-yuidoc": "~0.3.2",
-    "grunt-css": "~0.5.1",
-    "grunt-contrib-concat": "~0.1.1"
+    "grunt": "0.4.0rc7",
+    "grunt-css": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-jasmine": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-yuidoc": "*",
+    "grunt-contrib-concat": "*",
+    "grunt-template-jasmine-istanbul": "*"
   }
 }

@@ -377,9 +377,9 @@ describe('jquery.maenulabs.tour', function () {
 				manipulation.deploy();
 				var $cover = $('.' + $.tour.manipulation.ExposeManipulation.COVER_CLASSES);
 				expect($cover.size()).toEqual(1);
-				// FIXME fails in PhantomJS expect($cover.offset().top).toEqual(0);
+				expect($cover.offset().top).toEqual(0);
 				expect($cover.offset().left).toEqual(0);
-				// FIXME fails in PhantomJS expect($cover.height()).toEqual($(document).height());
+				expect($cover.height()).toEqual($(document).height());
 				expect($cover.width()).toEqual($(document).width());
 				expect($element.hasClass($.tour.manipulation.ExposeManipulation.CLASSES)).toBeTruthy();
 				expect(parseInt($element.css('z-index'), 10)).toBeGreaterThan(parseInt($cover.css('z-index'), 10));
